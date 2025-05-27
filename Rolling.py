@@ -24,8 +24,8 @@ plt.grid(True)
 plt.xticks(rotation=45)
 manager = plt.get_current_fig_manager()
 try:
-    manager.window.showMaximized()   # works on QtAgg, TkAgg
+    manager.window.showMaximized()   
 except AttributeError:
-    manager.full_screen_toggle()     # fallback
+    manager.full_screen_toggle()   
 plt.tight_layout()
 plt.show()
