@@ -1,8 +1,6 @@
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
-
-# 1. Select 20 Nifty 50 stock tickers (Yahoo Finance format with .NS for NSE).
 tickers = [
     "TCS.NS", "INFY.NS", "HDFCBANK.NS", "RELIANCE.NS", "ICICIBANK.NS",
     "HINDUNILVR.NS", "ITC.NS", "KOTAKBANK.NS", "LT.NS", "SBIN.NS",
@@ -10,7 +8,6 @@ tickers = [
     "ASIANPAINT.NS", "ULTRACEMCO.NS", "BHARTIARTL.NS", "MARUTI.NS", "TITAN.NS"
 ]
 
-# 2. Download adjusted closing prices for the past month and calculate % change.
 percent_changes = {}
 for ticker in tickers:
     try:
@@ -42,14 +39,12 @@ for ticker in tickers:
 
 changes_series = pd.Series(percent_changes)
 
-# 3. Identify top 5 gainers and top 5 losers.
 top_gainers = changes_series.nlargest(5)
 top_losers = changes_series[changes_series < 0].nsmallest(5)
 
 print("Top 5 Gainers:\n", top_gainers)
 print("\nTop 5 Losers:\n", top_losers)
 
-# 4. Plot bar chart of the 10 stocks.
 plot_tickers = list(top_gainers.index) + list(top_losers.index)
 plot_changes = list(top_gainers.values) + list(top_losers.values)
 colors = ['green'] * len(top_gainers) + ['red'] * len(top_losers)
@@ -72,7 +67,6 @@ for bar in bars:
 
 plt.show()
 
-# 5. Save results to CSV.
 output_df = pd.DataFrame({
     "Symbol": plot_tickers,
     "Percent Change": plot_changes
